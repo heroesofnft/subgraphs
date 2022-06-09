@@ -1,0 +1,19 @@
+{
+  "name": "expedition-herotestnet",
+  "license": "GPL-2.0",
+  "author": {
+    "name": "defikintaro"
+  },
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/expedition-herotestnet",
+    "create-local": "graph create --node http://localhost:8020/ heroesofnft/expedition-herotestnet",
+    "remove-local": "graph remove --node http://localhost:8020/ heroesofnft/expedition-herotestnet",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/expedition-herotestnet"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.26.0",
+    "@graphprotocol/graph-ts": "0.24.1"
+  }
+}

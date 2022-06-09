@@ -1,0 +1,33 @@
+type Campaign @entity {
+  id: ID!
+  campaigner: Bytes! # address
+  ambusher: Bytes! # address
+  isClaimedCampaigner: Boolean!
+  isClaimedAmbusher: Boolean!
+  rewardHonCampaigner: BigInt!
+  rewardHrmCampaigner: BigInt!
+  rewardHonAmbusher: BigInt!
+  rewardHrmAmbusher: BigInt!
+  tier: BigInt!
+  area: BigInt!
+  totalAttack: BigInt!
+  totalDefense: BigInt!
+  startTimestamp: BigInt!
+  tokens: [HeroCampaign!]! @derivedFrom(field: "campaign")
+}
+
+type Hero @entity {
+  id: ID!
+  level: BigInt!
+  attack: BigInt!
+  defense: BigInt!
+  endurance: BigInt!
+  campaigns: [HeroCampaign!]! @derivedFrom(field: "hero")
+}
+
+type HeroCampaign @entity {
+  id: ID!
+  campaign: Campaign!
+  hero: Hero!
+  isAmbusher: Boolean!
+}
