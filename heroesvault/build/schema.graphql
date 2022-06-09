@@ -1,0 +1,21 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type Record @entity {
+  id: ID!
+  user: Bytes! # address
+  hroId: BigInt!
+  honAmount: BigInt!
+  workerAmount: BigInt!
+}
+
+type RecordTotal @entity {
+  id: ID!
+  hroAmount: BigInt!
+  honAmount: BigInt!
+  workerAmount: BigInt!
+}
