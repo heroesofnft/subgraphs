@@ -27,6 +27,8 @@ export function handleParticipate(event: Participate): void {
     campaign = new Campaign(event.params._id.toString());
   }
 
+  let _reinforceTimestamps = campaign.reinforceTimestamps;
+
   // Get all the tokens
   for (let i = 0; i < tokens.length; i++) {
     const tokenId = tokens[i];
@@ -57,7 +59,7 @@ export function handleParticipate(event: Participate): void {
     heroCampaign.save();
 
     // Set campaign timestamps for each token
-    campaign.reinforceTimestamps.push(event.block.timestamp);
+    _reinforceTimestamps.push(event.block.timestamp)
   }
 
   // Note: In the time event fired tier & area have already values so it's safe to retrieve here
@@ -83,6 +85,8 @@ export function handleParticipate(event: Participate): void {
     campaign.totalAttack = event.params._points;
   }
 
+
+  campaign.reinforceTimestamps = _reinforceTimestamps;
   campaign.save();
 }
 
@@ -175,7 +179,8 @@ export function handleReinforceAttack(event: ReinforceAttack): void {
   campaign.totalAttack = event.params._points;
 
   // Set campaign reinforcement timestamp
-  campaign.reinforceTimestamps.push(event.block.timestamp);
+  let _reinforceTimestamps = campaign.reinforceTimestamps;
+  _reinforceTimestamps.push(event.block.timestamp);
 
   // Create the heroCampaign record
   let heroCampaign = new HeroCampaign(
@@ -189,6 +194,7 @@ export function handleReinforceAttack(event: ReinforceAttack): void {
 
   heroCampaign.save();
 
+  campaign.reinforceTimestamps = _reinforceTimestamps;
   campaign.save();
 }
 
@@ -222,7 +228,8 @@ export function handleReinforceDefense(event: ReinforceDefense): void {
   campaign.totalDefense = event.params._points;
 
   // Set campaign reinforcement timestamp
-  campaign.reinforceTimestamps.push(event.block.timestamp);
+  let _reinforceTimestamps = campaign.reinforceTimestamps;
+  _reinforceTimestamps.push(event.block.timestamp);
 
   // Create the heroCampaign record
   let heroCampaign = new HeroCampaign(
@@ -236,6 +243,7 @@ export function handleReinforceDefense(event: ReinforceDefense): void {
 
   heroCampaign.save();
 
+  campaign.reinforceTimestamps = _reinforceTimestamps;
   campaign.save();
 }
 
