@@ -13,7 +13,7 @@ type Campaign @entity {
   totalAttack: BigInt!
   totalDefense: BigInt!
   startTimestamp: BigInt!
-  reinforceTimestamps: [BigInt!]
+  reinforceTimestamps: [BigInt!]!
   tokens: [HeroCampaign!]! @derivedFrom(field: "campaign")
 }
 

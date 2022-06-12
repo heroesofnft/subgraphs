@@ -26,7 +26,6 @@ export function handleParticipate(event: Participate): void {
   if (!campaign) {
     campaign = new Campaign(event.params._id.toString());
   }
-  if (!campaign.reinforceTimestamps)campaign.reinforceTimestamps =[];
 
   // Get all the tokens
   for (let i = 0; i < tokens.length; i++) {
@@ -58,7 +57,7 @@ export function handleParticipate(event: Participate): void {
     heroCampaign.save();
 
     // Set campaign timestamps for each token
-    campaign.reinforceTimestamps.push(event.block.timestamp );
+    campaign.reinforceTimestamps.push(event.block.timestamp);
   }
 
   // Note: In the time event fired tier & area have already values so it's safe to retrieve here
@@ -176,8 +175,7 @@ export function handleReinforceAttack(event: ReinforceAttack): void {
   campaign.totalAttack = event.params._points;
 
   // Set campaign reinforcement timestamp
-  if (!campaign.reinforceTimestamps) campaign.reinforceTimestamps =[]
-  campaign.reinforceTimestamps.push(event.block.timestamp );
+  campaign.reinforceTimestamps.push(event.block.timestamp);
 
   // Create the heroCampaign record
   let heroCampaign = new HeroCampaign(
@@ -222,10 +220,9 @@ export function handleReinforceDefense(event: ReinforceDefense): void {
 
   // set the total defense points
   campaign.totalDefense = event.params._points;
-  
+
   // Set campaign reinforcement timestamp
-  if (!campaign.reinforceTimestamps) campaign.reinforceTimestamps =[]
-  campaign.reinforceTimestamps.push(event.block.timestamp );
+  campaign.reinforceTimestamps.push(event.block.timestamp);
 
   // Create the heroCampaign record
   let heroCampaign = new HeroCampaign(
