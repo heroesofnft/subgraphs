@@ -1,0 +1,21 @@
+{
+  "name": "hero-heroes-token",
+  "license": "GPL-3.0",
+  "version": "1.0.0",
+  "author": "Heroes of Nft",
+  "scripts": {
+    "codegen": "npx graph codegen",
+    "build": "npx graph build",
+    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/hero-nft-heroes-token",
+    "deploy:avax": "npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ heroesofnft/hero-heroes-token subgraph.yaml",
+    "create-local": "npx graph create --node http://localhost:8020/ heroesofnft/hero-heroes-token",
+    "remove-local": "npx graph remove --node http://localhost:8020/ heroesofnft/hero-heroes-token",
+    "deploy-local": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-heroes-token",
+    "start:node": "rm -rf ./graph_data && docker-compose up -d"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.32.0",
+    "@graphprotocol/graph-ts": "0.27.0",
+    "mustache": "^4.1.0"
+  }
+}
