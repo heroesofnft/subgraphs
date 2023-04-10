@@ -6,7 +6,7 @@
   "scripts": {
     "codegen": "npx graph codegen",
     "build": "npx graph build",
-    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/hero-nft-heroes-token",
+    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/hero-heroes-token",
     "deploy:avax": "npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ heroesofnft/hero-heroes-token subgraph.yaml",
     "create-local": "npx graph create --node http://localhost:8020/ heroesofnft/hero-heroes-token",
     "remove-local": "npx graph remove --node http://localhost:8020/ heroesofnft/hero-heroes-token",
