@@ -1,6 +1,8 @@
 {
   "name": "HeroesVault",
   "license": "GPL-3.0",
+  "version": "1.0.0",
+  "author": "Heroes of Nft",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",

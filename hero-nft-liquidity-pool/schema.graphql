@@ -1,0 +1,25 @@
+type Stake @entity {
+  id: ID!
+  user: Bytes! # address
+  hroId: BigInt!
+  honAmount: BigInt!
+  lpAmount: BigInt!
+  tierId: BigInt!
+  stakeTimestamp: BigInt!
+  unstakeTimestamp: BigInt
+  isStaked: Boolean!
+}
+
+type StakeTotal @entity {
+  id: ID!
+  user: Bytes!
+  hroAmount: BigInt!
+  honAmount: BigInt!
+  lpAmount: BigInt!
+}
+
+type Tier @entity {
+  id: ID!
+  tierId: BigInt!
+  hroAmount: BigInt!
+}
