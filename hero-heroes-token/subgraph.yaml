@@ -28,4 +28,6 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferERC721
+        - event: UpdateUser(indexed uint256,indexed address,uint64)
+          handler: handleUpdateUser 
       file: ./src/heroestoken.ts
