@@ -14,7 +14,7 @@ import {
 
 export function handleTransferERC721(event: Transfer): void {
 
-  log.info("handleTransferERC721: {}", [event.params.tokenId.toString()]);
+  // log.info("handleTransferERC721: {}", [event.params.tokenId.toString()]);
   if (event.params && event.params.tokenId && event.address) {
     const nftExist = Nft.load(
       event.params.tokenId.toString() + "-" + event.address.toHex()
