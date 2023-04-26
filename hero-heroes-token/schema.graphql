@@ -49,3 +49,11 @@ type TransferHistory @entity {
   to: Bytes!
   createdAtTimestamp: BigInt!
 }
+
+type Rent @entity {
+  id: ID!
+  tokenID: BigInt!
+  user: Bytes!
+  expires: BigInt!
+  createdAtTimestamp: BigInt!
+}

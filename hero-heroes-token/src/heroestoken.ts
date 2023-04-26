@@ -1,5 +1,5 @@
-import { Nft, TransferHistory } from "../generated/schema";
-import { Transfer } from "../generated/HeroesToken/HeroesToken";
+import { Nft, TransferHistory, Rent } from "../generated/schema";
+import { Transfer, UpdateUser } from "../generated/HeroesToken/HeroesToken";
 import {
   Address,
   BigInt,
@@ -32,6 +32,8 @@ export function handleTransferERC721(event: Transfer): void {
       nft.owner = event.params.to;
       nft.createdAtTimestamp = event.block.timestamp;
 
+      nft.tokenURI = `https://character.heroesofnft.com/token/${nft.tokenID.toString()}`;
+
       //const erc721 = Erc721__factory.connect(event.address.toString(), api);
       //const tokenURI = await erc721.tokenURI(event.args.tokenId.toString());
       
@@ -59,5 +61,30 @@ export function handleTransferERC721(event: Transfer): void {
     transferHistory.to = event.params.to;
     transferHistory.createdAtTimestamp = event.block.timestamp;
     transferHistory.save();
+  }
+}
+
+export function handleUpdateUser(event: UpdateUser): void {
+
+  if (event.params && event.params.tokenId && event.address) {
+    const rent = Rent.load(
+      event.params.tokenId.toString() + "-" + event.address.toHex()
+    );
+    if (rent) {
+      rent.user = event.params.user;
+      rent.expires = event.block.timestamp;
+      rent.createdAtTimestamp = event.block.timestamp;
+      rent.save();
+    } else {
+      const rent = new Rent(
+        event.params.tokenId.toString() + "-" + event.address.toHex()
+      );
+      rent.tokenID = event.params.tokenId;
+      rent.user = event.params.user;
+      rent.expires = event.params.expires;
+      rent.createdAtTimestamp = event.block.timestamp;
+
+      rent.save();
+    }
   }
 }
