@@ -11,7 +11,7 @@
     "create-local": "graph create --node http://localhost:8020/ heroesofnft/hero-nft-liquidity-pool",
     "remove-local": "graph remove --node http://localhost:8020/ heroesofnft/hero-nft-liquidity-pool",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-nft-liquidity-pool",
-    "start:node": "rm -rf ./graph_data && docker-compose up -d"
+    "start:node": "rm -rf ./graph_data && docker-compose up"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.32.0",
