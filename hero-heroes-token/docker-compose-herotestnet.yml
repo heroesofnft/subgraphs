@@ -23,7 +23,7 @@ services:
       GRAPH_NO_EIP_1898_SUPPORT: 1
       GRAPH_ALLOW_NON_DETERMINISTIC_IPFS: 1
       GRAPH_ALLOW_NON_DETERMINISTIC_FULLTEXT_SEARCH: 1
-      ethereum: "herotestnet:https://testnet.heroesofnft.com/ext/bc/2KV1ighhTjNpuQq8BVgHeJF3QHdF3KxhY9AqB9M1GfUuBCKjNo/rpc"
+      ethereum: "avalanche:https://testnet.heroesofnft.com/ext/bc/2KV1ighhTjNpuQq8BVgHeJF3QHdF3KxhY9AqB9M1GfUuBCKjNo/rpc"
       RUST_LOG: info
   ipfs:
     container_name: ipfs

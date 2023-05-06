@@ -12,6 +12,7 @@
     "create-local": "npx graph create --node http://localhost:8020/ heroesofnft/hero-heroes-token",
     "remove-local": "npx graph remove --node http://localhost:8020/ heroesofnft/hero-heroes-token",
     "deploy-local": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-heroes-token",
+    "deploy-local:herotestnet": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-heroes-token subgraph-herotestnet.yaml",
     "start:node": "rm -rf ./graph_data && docker-compose up",
     "start:heronode": "rm -rf ./graph_data && docker-compose -f docker-compose-herotestnet.yml up"
 
