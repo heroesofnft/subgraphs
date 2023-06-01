@@ -1,0 +1,166 @@
+type Nft @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  owner: Bytes!
+  createdAtTimestamp: BigInt!
+  tokenURI: String
+}
+
+type TransferHistory @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  from: Bytes!
+  to: Bytes!
+  createdAtTimestamp: BigInt!
+}
+
+type UpdateUser @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  user: Bytes! # address
+  expires: BigInt! # uint64
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenSaleProgram @entity {
+  id: ID!
+  tierID: BigInt!
+  name: String
+  price: BigInt!
+  count: BigInt!
+  remainingAmount: BigInt!
+  saleEnabled: Boolean
+  startDate: BigInt!
+  endDate: BigInt!
+  tokenIdRange: String
+  whiteListEnabled: Boolean
+  savedAtTimestamp: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenSaleHistory @entity {
+  id: ID!
+  tierID: BigInt!
+  price: BigInt!
+  purchasedPrice: BigInt!
+  tokenId: BigInt!
+  seller: String
+  createdAtTimestamp: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferSaleTotalAmount @entity {
+  id: ID!
+  tokenAmount: BigInt!
+  transferAddress: String
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WhiteListProgram @entity {
+  id: ID!
+  tierId: BigInt!
+  whiteList: String
+  whiteListDiscountRatio: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangeLandOwnerShareCommissionEvent @entity(immutable: true) {
+  id: Bytes!
+  stakingSubscribeId: BigInt! # uint256
+  stakingAddress: Bytes! # address
+  oldLandOwnerCommission: BigInt! # uint256
+  landOwnerCommission: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnerStakingSubscribeEvent @entity(immutable: true) {
+  id: Bytes!
+  ownerStakingSubscribeId: BigInt! # uint256
+  stakingAddress: Bytes! # address
+  stakingProgramId: BigInt! # uint256
+  tokenId: BigInt! # uint256
+  stakingStartDate: BigInt! # uint256
+  stakingEndDate: BigInt! # uint256
+  stakingReward: BigInt! # uint256
+  landOwnerCommission: BigInt! # uint256
+  state: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenStakingProgram @entity{
+  id: ID!
+  tierID: BigInt!
+  landNftPurchasePrice: BigInt!
+  stakingTimeDuration: String!
+  stakingOwnerRate: BigInt!
+  defaultLandOwnerComission: BigInt!
+  totalLandShareSize: BigInt!
+  landSharePricePerUnit: BigInt!
+  landShareStakingDailyReward: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangeLandOwnerShareCommissionHistory @entity {
+  id: ID!
+  stakingSubscribeId: BigInt!
+  stakingAddress: String!
+  oldLandOwnerCommission: BigInt!
+  landOwnerCommission: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnerStakingSubscribe @entity {
+  id: ID!
+  tokenId: BigInt!
+  stakingAddress: String!
+  stakingProgram: TokenStakingProgram!
+  stakingStartDate: BigInt!
+  stakingEndDate: BigInt!
+  stakingReward: BigInt!
+  landOwnerCommission: BigInt!
+  shareStakingCount: BigInt!
+  shareStakingReaming: BigInt!
+  shareStakingReward: BigInt!
+  claimAtTimestamp: BigInt
+  createdAtTimestamp: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ShareStakingSubscribe @entity {
+  id: ID!
+  stakingAddress: String!
+  shareAmount: BigInt!
+  stakingStartDate: BigInt!
+  stakingEndDate: BigInt!
+  stakingReward: BigInt!
+  lockedTokenAmount: BigInt!
+  landOwnerCommissionAmount: BigInt!
+  ownerStakingSubscribe: OwnerStakingSubscribe!
+  claimAtTimestamp: BigInt
+  createdAtTimestamp: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

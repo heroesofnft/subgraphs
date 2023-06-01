@@ -1,0 +1,18 @@
+{
+  "name": "honlandnft",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/honlandnft",
+    "create-local": "graph create --node http://localhost:8020/ heroesofnft/honlandnft",
+    "remove-local": "graph remove --node http://localhost:8020/ heroesofnft/honlandnft",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/honlandnft",
+    "test": "graph test",
+    "start:node": "docker-compose pull && docker-compose up --remove-orphans"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-ts": "0.29.1"
+  },
+  "devDependencies": { "matchstick-as": "0.5.0" }
+}
