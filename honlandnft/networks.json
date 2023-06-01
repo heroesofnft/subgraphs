@@ -1,0 +1,8 @@
+{
+  "herotestnet": {
+    "LandToken": {
+      "address": "0x29246ebd99F06a1910f4e3Dffeb65BF3F5eD5394",
+      "startBlock": 31000
+    }
+  }
+}

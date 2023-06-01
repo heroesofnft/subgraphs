@@ -1,0 +1,71 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LandToken
+    network: herotestnet
+    source:
+      address: "0x29246ebd99F06a1910f4e3Dffeb65BF3F5eD5394"
+      abi: LandToken
+      startBlock: 31603
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Nft
+        - TransferHistory
+        - UpdateUser
+        - TokenSaleProgram
+        - TokenSaleHistory
+        - TransferSaleTotalAmount
+        - WhiteListProgram
+      abis:
+        - name: LandToken
+          file: ./abis/LandToken.json
+      eventHandlers:
+        - event: TokenSaleEvent(indexed uint256,uint256,uint256,indexed uint256,uint256,indexed address)
+          handler: handleTokenSaleEvent
+        - event: TokenSaleProgramEvent(indexed uint256,string,uint256,uint256,uint256,bool,uint64,uint64,uint256[2],bool)
+          handler: handleTokenSaleProgramEvent
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: TransferSaleTotalAmountEvent(uint256,address)
+          handler: handleTransferSaleTotalAmountEvent
+        - event: UpdateUser(indexed uint256,indexed address,uint64)
+          handler: handleUpdateUser
+        - event: WhiteListSaveEvent(uint256,indexed uint256,address[],uint256)
+          handler: handleWhiteListSaveEvent
+      file: ./src/land-token.ts
+  - kind: ethereum
+    name: LandStaking
+    network: herotestnet
+    source:
+      address: "0x491bD16c7893c1C390519aF1bcC4ECaf56eB5019"
+      abi: LandStaking
+      startBlock: 31958
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TokenStakingProgram
+        - ChangeLandOwnerShareCommissionHistory
+        - OwnerStakingSubscribe
+        - ShareStakingSubscribe
+      abis:
+        - name: LandStaking
+          file: ./abis/LandStaking.json
+      eventHandlers:
+        - event: ChangeLandOwnerShareCommissionEvent(uint256,indexed address,uint256,uint256)
+          handler: handleChangeLandOwnerShareCommissionEvent
+        - event: OwnerStakingSubscribeEvent(uint256,indexed address,indexed uint256,indexed uint256,uint256,uint256,uint256,uint256,uint8)
+          handler: handleOwnerStakingSubscribeEvent
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: SaveStakingProgramEvent(uint256,indexed uint256,uint256,uint256[3],uint256,uint256,uint256,uint256,uint256)
+          handler: handleSaveStakingProgramEvent
+        - event: ShareStakingSubscribeEvent(uint256,indexed uint256,indexed address,uint256,uint256,uint256,uint256,uint256,uint256,uint8)
+          handler: handleShareStakingSubscribeEvent
+      file: ./src/land-staking.ts
