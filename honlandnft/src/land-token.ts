@@ -70,7 +70,7 @@ export function handleTransfer(event: TransferEvent): void {
       nft.createdAtTimestamp = event.block.timestamp;
 
       nft.tokenURI = `https://land.heroesofnft.com/token/${nft.tokenID.toString()}`;
-
+      //test
       nft.save();
     }
 
