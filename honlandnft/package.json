@@ -4,7 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/honlandnft",
+    "deploy": "graph deploy --node https://test-graph.heroesofnft.com/subgraphs/name/heroesofnft/honlandnft/deploy --ipfs https://test-graph.heroesofnft.com/subgraphs/name/heroesofnft/honlandnft/ipfs heroesofnft/honlandnft",
     "create-local": "graph create --node http://localhost:8020/ heroesofnft/honlandnft",
     "remove-local": "graph remove --node http://localhost:8020/ heroesofnft/honlandnft",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/honlandnft",
