@@ -69,18 +69,8 @@ export function handleTransfer(event: TransferEvent): void {
       nft.owner = event.params.to;
       nft.createdAtTimestamp = event.block.timestamp;
 
-      nft.tokenURI = `https://character.heroesofnft.com/token/${nft.tokenID.toString()}`;
-
-      //const erc721 = Erc721__factory.connect(event.address.toString(), api);
-      //const tokenURI = await erc721.tokenURI(event.args.tokenId.toString());
-
-      // nft.tokenURI = `https://character.heroesofnft.com/token/${nft.tokenID.toString()}`;
-      // const response = await fetch(nft.tokenURI);
-
-      // const data = await response.json();
-      // // logger.info("NFT metadata: " + JSON.stringify(data));
-      // nft.metadata = data;
-
+      nft.tokenURI = `https://land.heroesofnft.com/token/${nft.tokenID.toString()}`;
+      //test
       nft.save();
     }
 

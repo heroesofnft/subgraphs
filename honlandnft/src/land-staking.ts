@@ -30,7 +30,7 @@ export function handleChangeLandOwnerShareCommissionEvent(
       ownerStakingSubscribeExist.save();
     }
 }
-
+//test
 export function handleOwnerStakingSubscribeEvent(
   event: OwnerStakingSubscribeEventEvent
 ): void {
