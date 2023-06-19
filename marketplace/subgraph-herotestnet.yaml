@@ -1,0 +1,92 @@
+specVersion: 0.0.5
+description: Marketplace
+repository: https://github.com/heroesofnft/subgraphs
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: AsksV1_1
+    network: herotestnet
+    source:
+      address: "0x1aF7386bF311EfF66a8840cFC47D6D3369ed0933"
+      abi: AsksV1_1
+      startBlock: 17416
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Ask
+        - Nft
+        - TransferHistory
+      abis:
+        - name: AsksV1_1
+          file: ./abis/AsksV1_1.json
+      eventHandlers:
+        - event: AskCreated(indexed address,indexed uint256,(address,address,address,uint16,uint256))
+          handler: handleAskCreated
+        - event: AskPriceUpdated(indexed address,indexed uint256,(address,address,address,uint16,uint256))
+          handler: handleAskPriceUpdated
+        - event: AskCanceled(indexed address,indexed uint256,(address,address,address,uint16,uint256))
+          handler: handleAskCanceled
+        - event: AskFilled(indexed address,indexed uint256,indexed address,address,(address,address,address,uint16,uint256))
+          handler: handleAskFilled
+      file: ./src/marketplace.ts
+  - kind: ethereum/contract
+    name: OffersV1
+    network: herotestnet
+    source:
+      address: "0xd898e705F887EE389f7Db2F7695Ef1d8806B2180"
+      abi: OffersV1
+      startBlock: 17416
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Offer
+        - Nft
+        - TransferHistory
+      abis:
+        - name: OffersV1
+          file: ./abis/OffersV1.json
+      eventHandlers:
+        - event: OfferCreated(indexed address,indexed uint256,indexed uint256,(address,address,uint16,uint256))
+          handler: handleOfferCreated
+        - event: OfferUpdated(indexed address,indexed uint256,indexed uint256,(address,address,uint16,uint256))
+          handler: handleOfferUpdated
+        - event: OfferCanceled(indexed address,indexed uint256,indexed uint256,(address,address,uint16,uint256))
+          handler: handleOfferCanceled
+        - event: OfferFilled(indexed address,indexed uint256,indexed uint256,address,address,(address,address,uint16,uint256))
+          handler: handleOfferFilled
+      file: ./src/marketplace.ts
+  - kind: ethereum/contract
+    name: ReserveAuctionCoreErc20
+    network: herotestnet
+    source:
+      address: "0x72D6715294E1cB85F9D6c279E084601a7aa4635c"
+      abi: ReserveAuctionCoreErc20
+      startBlock: 17416
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ReserveAuction
+        - Nft
+        - TransferHistory
+      abis:
+        - name: ReserveAuctionCoreErc20
+          file: ./abis/ReserveAuctionCoreErc20.json
+      eventHandlers:
+        - event: AuctionCreated(indexed address,indexed uint256,(address,address,uint256,uint256,address,uint48,uint48,address,uint96))
+          handler: handleAuctionCreated
+        - event: AuctionReservePriceUpdated(indexed address,indexed uint256,(address,address,uint256,uint256,address,uint48,uint48,address,uint96))
+          handler: handleAuctionReservePriceUpdated
+        - event: AuctionCanceled(indexed address,indexed uint256,(address,address,uint256,uint256,address,uint48,uint48,address,uint96))
+          handler: handleAuctionCanceled
+        - event: AuctionBid(indexed address,indexed uint256,bool,bool,(address,address,uint256,uint256,address,uint48,uint48,address,uint96))
+          handler: handleAuctionBid
+        - event: AuctionEnded(indexed address,indexed uint256,(address,address,uint256,uint256,address,uint48,uint48,address,uint96))
+          handler: handleAuctionEnded
+      file: ./src/marketplace.ts

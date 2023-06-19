@@ -1,0 +1,57 @@
+type Ask @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  seller: Bytes!
+  sellerFundsRecipient: Bytes!
+  askCurrency: Bytes!
+  askPrice: BigInt!
+  createdAtTimestamp: BigInt!
+}
+
+type ReserveAuction @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  seller: Bytes!
+  sellerFundsRecipient: Bytes!
+  currency: Bytes!
+  reservePrice: BigInt!
+  highestBid: BigInt
+  highestBidder: Bytes
+  duration: BigInt!
+  startTime: BigInt!
+  firstBidTime: BigInt
+  createdAtTimestamp: BigInt!
+  updatedAtTimestamp: BigInt
+}
+
+type Offer @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  maker: Bytes!
+  currency: Bytes!
+  offerPrice: BigInt!
+  findersFeeBps: Int!
+  createdAtTimestamp: BigInt!
+}
+
+type PriceHistory @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  seller: Bytes!
+  currency: Bytes!
+  price: BigInt!
+  createdAtTimestamp: BigInt!
+}
+
+type Nft @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  owner: Bytes!
+  createdAtTimestamp: BigInt!
+  tokenURI: String
+}
