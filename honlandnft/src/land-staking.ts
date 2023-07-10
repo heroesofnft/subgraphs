@@ -17,7 +17,7 @@ export function handleSaveStakingProgram(
   event: SaveStakingProgramEvent
 ): void {
   const stakingProgramId = event.params.stakingProgramId.toString();
-  let tokenStakingProgram = StakingProgram.load(stakingProgramId.toString())
+  let tokenStakingProgram = StakingProgram.load(stakingProgramId)
   if (tokenStakingProgram) {
     tokenStakingProgram.tierID = event.params.tierId;
     tokenStakingProgram.stakingTimeDuration = event.params.stakingTimeDuration.toString();
@@ -28,7 +28,7 @@ export function handleSaveStakingProgram(
     tokenStakingProgram.landShareStakingDailyReward = event.params.landShareStakingDailyReward;
   }
   else {
-    tokenStakingProgram = new StakingProgram(stakingProgramId.toString());
+    tokenStakingProgram = new StakingProgram(stakingProgramId);
     tokenStakingProgram.tierID = event.params.tierId;
     tokenStakingProgram.stakingTimeDuration = event.params.stakingTimeDuration.toString();
     tokenStakingProgram.stakingReward = event.params.stakingReward;

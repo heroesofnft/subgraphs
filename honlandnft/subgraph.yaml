@@ -47,7 +47,7 @@ dataSources:
       eventHandlers:
         - event: TokenSaleEvent(indexed uint256,uint256,uint256,indexed uint256,uint256,indexed address)
           handler: handleTokenSaleEvent
-        - event: TokenSaleProgramEvent(indexed uint256,string,uint256,uint256,uint256,bool,uint64,uint64,uint256[2],bool)
+        - event: TokenSaleProgramEvent(indexed uint256,uint256,uint256,uint256,uint256,uint256,uint256[2],bool,bool,string)
           handler: handleTokenSaleProgramEvent
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
@@ -55,7 +55,7 @@ dataSources:
           handler: handleTransferSaleTotalAmountEvent
         - event: UpdateUser(indexed uint256,indexed address,uint64)
           handler: handleUpdateUser
-        - event: WhiteListSaveEvent(uint256,indexed uint256,address[],uint256)
+        - event: WhiteListSaveEvent(uint256,indexed uint256,uint256,address[])
           handler: handleWhiteListSaveEvent
       file: ./src/land-token.ts
   - kind: ethereum
@@ -83,10 +83,10 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: SaveStakingProgram(uint256,indexed uint256,uint256[3],uint256,uint256,uint256,uint256,uint256)
           handler: handleSaveStakingProgram
-        - event: ChangeLandOwnerShareCommission(uint256,indexed address,uint256)
+        - event: ChangeLandOwnerShareCommission(uint256,uint256,indexed address)
           handler: handleChangeLandOwnerShareCommission
-        - event: StakeLandOwner(uint256,indexed address,indexed uint256,indexed uint256,uint256,uint256,uint256,uint256,uint8)
+        - event: StakeLandOwner(uint256,indexed uint256,indexed uint256,uint256,uint256,uint256,uint256,indexed address,uint8)
           handler: handleStakeLandOwner
-        - event: StakeLandShare(uint256,indexed uint256,indexed address,uint256,uint256,uint256,uint256,uint256,uint256,uint8)
+        - event: StakeLandShare(uint256,indexed uint256,uint256,uint256,uint256,uint256,uint256,uint256,indexed address,uint8)
           handler: handleStakeLandShare
       file: ./src/land-staking.ts

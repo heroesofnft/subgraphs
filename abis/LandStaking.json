@@ -1,10 +1,5 @@
 [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -46,16 +41,16 @@
         "type": "uint256"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "stakingAddress",
-        "type": "address"
-      },
-      {
         "indexed": false,
         "internalType": "uint256",
         "name": "landOwnerCommission",
         "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "stakingAddress",
+        "type": "address"
       }
     ],
     "name": "ChangeLandOwnerShareCommission",
@@ -172,12 +167,6 @@
       },
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "ownerAddress",
-        "type": "address"
-      },
-      {
-        "indexed": true,
         "internalType": "uint256",
         "name": "stakingProgramId",
         "type": "uint256"
@@ -213,6 +202,12 @@
         "type": "uint256"
       },
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "ownerAddress",
+        "type": "address"
+      },
+      {
         "indexed": false,
         "internalType": "enum LandStakingV0.StakeState",
         "name": "state",
@@ -236,12 +231,6 @@
         "internalType": "uint256",
         "name": "landOwnerStakeId",
         "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "shareAddress",
-        "type": "address"
       },
       {
         "indexed": false,
@@ -278,6 +267,12 @@
         "internalType": "uint256",
         "name": "landOwnerCommissionAmount",
         "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "shareAddress",
+        "type": "address"
       },
       {
         "indexed": false,
