@@ -76,39 +76,22 @@ type WhiteListProgram @entity {
   transactionHash: Bytes!
 }
 
-type ChangeLandOwnerShareCommissionEvent @entity(immutable: true) {
-  id: Bytes!
-  stakingSubscribeId: BigInt! # uint256
-  stakingAddress: Bytes! # address
-  oldLandOwnerCommission: BigInt! # uint256
-  landOwnerCommission: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type OwnerStakingSubscribeEvent @entity(immutable: true) {
-  id: Bytes!
-  ownerStakingSubscribeId: BigInt! # uint256
-  stakingAddress: Bytes! # address
-  stakingProgramId: BigInt! # uint256
-  tokenId: BigInt! # uint256
-  stakingStartDate: BigInt! # uint256
-  stakingEndDate: BigInt! # uint256
-  stakingReward: BigInt! # uint256
-  landOwnerCommission: BigInt! # uint256
-  state: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type TokenStakingProgram @entity{
+type StakingProgram @entity{
   id: ID!
   tierID: BigInt!
-  landNftPurchasePrice: BigInt!
   stakingTimeDuration: String!
-  stakingOwnerRate: BigInt!
+  stakingReward: BigInt!
+  defaultLandOwnerComission: BigInt!
+  totalLandShareSize: BigInt!
+  landSharePricePerUnit: BigInt!
+  landShareStakingDailyReward: BigInt!
+}
+
+type StakingProgramHistory @entity {
+  id: Bytes!
+  tierID: BigInt!
+  stakingTimeDuration: String!
+  stakingReward: BigInt!
   defaultLandOwnerComission: BigInt!
   totalLandShareSize: BigInt!
   landSharePricePerUnit: BigInt!
@@ -122,18 +105,17 @@ type ChangeLandOwnerShareCommissionHistory @entity {
   id: ID!
   stakingSubscribeId: BigInt!
   stakingAddress: String!
-  oldLandOwnerCommission: BigInt!
   landOwnerCommission: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type OwnerStakingSubscribe @entity {
+type StakeLandOwner @entity {
   id: ID!
   tokenId: BigInt!
-  stakingAddress: String!
-  stakingProgram: TokenStakingProgram!
+  ownerAddress: String!
+  stakingProgram: StakingProgram!
   stakingStartDate: BigInt!
   stakingEndDate: BigInt!
   stakingReward: BigInt!
@@ -148,19 +130,25 @@ type OwnerStakingSubscribe @entity {
   transactionHash: Bytes!
 }
 
-type ShareStakingSubscribe @entity {
+type StakeLandShare @entity {
   id: ID!
-  stakingAddress: String!
+  shareAddress: String!
   shareAmount: BigInt!
   stakingStartDate: BigInt!
   stakingEndDate: BigInt!
   stakingReward: BigInt!
   lockedTokenAmount: BigInt!
   landOwnerCommissionAmount: BigInt!
-  ownerStakingSubscribe: OwnerStakingSubscribe!
+  stakeLandOwner: StakeLandOwner!
   claimAtTimestamp: BigInt
   createdAtTimestamp: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type StakingPoolBalance @entity {
+  id: ID!
+  landOwnerPool: BigInt!
+  landSharePool: BigInt!
 }

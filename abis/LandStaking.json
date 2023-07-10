@@ -42,7 +42,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "stakingSubscribeId",
+        "name": "landOwnerStakeId",
         "type": "uint256"
       },
       {
@@ -54,17 +54,11 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "oldLandOwnerCommission",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "landOwnerCommission",
         "type": "uint256"
       }
     ],
-    "name": "ChangeLandOwnerShareCommissionEvent",
+    "name": "ChangeLandOwnerShareCommission",
     "type": "event"
   },
   {
@@ -78,67 +72,6 @@
       }
     ],
     "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "ownerStakingSubscribeId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "stakingAddress",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "stakingProgramId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "stakingStartDate",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "stakingEndDate",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "stakingReward",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "landOwnerCommission",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "enum LandStakingBase.StakeState",
-        "name": "state",
-        "type": "uint8"
-      }
-    ],
-    "name": "OwnerStakingSubscribeEvent",
     "type": "event"
   },
   {
@@ -190,12 +123,6 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "landNftPurchasePrice",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256[3]",
         "name": "stakingTimeDuration",
         "type": "uint256[3]"
@@ -203,7 +130,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "stakingOwnerRate",
+        "name": "stakingReward",
         "type": "uint256"
       },
       {
@@ -231,7 +158,7 @@
         "type": "uint256"
       }
     ],
-    "name": "SaveStakingProgramEvent",
+    "name": "SaveStakingProgram",
     "type": "event"
   },
   {
@@ -240,19 +167,80 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "shareStakingSubscribeId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "ownerStakingSubscribeId",
+        "name": "landOwnerStakeId",
         "type": "uint256"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "stakingAddress",
+        "name": "ownerAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "stakingProgramId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "stakingStartDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "stakingEndDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "stakingReward",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "landOwnerCommission",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum LandStakingV0.StakeState",
+        "name": "state",
+        "type": "uint8"
+      }
+    ],
+    "name": "StakeLandOwner",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "landShareStakeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "landOwnerStakeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "shareAddress",
         "type": "address"
       },
       {
@@ -293,12 +281,12 @@
       },
       {
         "indexed": false,
-        "internalType": "enum LandStakingBase.StakeState",
+        "internalType": "enum LandStakingV0.StakeState",
         "name": "state",
         "type": "uint8"
       }
     ],
-    "name": "ShareStakingSubscribeEvent",
+    "name": "StakeLandShare",
     "type": "event"
   },
   {
@@ -331,7 +319,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "ownerStakingSubscribeId",
+        "name": "landOwnerStakeId",
         "type": "uint256"
       },
       {
@@ -359,47 +347,6 @@
       }
     ],
     "name": "initialize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "stakingProgramId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "landOwnerCommission",
-        "type": "uint256"
-      }
-    ],
-    "name": "joinOwnerStakingSubscribe",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "ownerStakingSubscribeId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "shareAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "joinShareStakingSubscribe",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -472,18 +419,13 @@
             "type": "uint256"
           },
           {
-            "internalType": "uint256",
-            "name": "landNftPurchasePrice",
-            "type": "uint256"
-          },
-          {
             "internalType": "uint256[3]",
             "name": "stakingTimeDuration",
             "type": "uint256[3]"
           },
           {
             "internalType": "uint256",
-            "name": "stakingOwnerRate",
+            "name": "stakingReward",
             "type": "uint256"
           },
           {
@@ -507,7 +449,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct LandStakingBase.StakingProgram[]",
+        "internalType": "struct LandStakingV0.StakingProgram[]",
         "name": "_stakingPrograms",
         "type": "tuple[]"
       }
@@ -572,6 +514,47 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "stakingProgramId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "landOwnerCommission",
+        "type": "uint256"
+      }
+    ],
+    "name": "stakeLandOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "landOwnerStakeId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "shareAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "stakeLandShare",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "newOwner",
         "type": "address"
@@ -586,11 +569,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "ownerStakingSubscribeId",
+        "name": "landOwnerStakeId",
         "type": "uint256"
       }
     ],
-    "name": "unStakeOwnerStakingSubscribe",
+    "name": "unStakeLandOwner",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -599,11 +582,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "shareStakingSubscribeId",
+        "name": "landShareStakeId",
         "type": "uint256"
       }
     ],
-    "name": "unStakeShareStakingSubscribe",
+    "name": "unStakeLandShareStake",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
