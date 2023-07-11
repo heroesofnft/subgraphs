@@ -5,6 +5,7 @@ type Nft @entity {
   owner: Bytes!
   createdAtTimestamp: BigInt!
   tokenURI: String
+  tierID: BigInt!
 }
 
 type TransferHistory @entity {
