@@ -84,6 +84,7 @@ export function handleTransfer(event: TransferEvent): void {
       else if((event.params.tokenId.equals(BigInt.fromI32(2275)) || event.params.tokenId.lt(BigInt.fromI32(2275))) && (event.params.tokenId.equals(BigInt.fromI32(4024)) || event.params.tokenId.gt(BigInt.fromI32(4024)))){
         nft.tierID = BigInt.fromI32(4);
       }
+      else nft.tierID = BigInt.fromI32(0);
       nft.save();
     }
 
