@@ -59,7 +59,7 @@ export function handleChangeLandOwnerShareCommission(
 ): void {
   const changeLandOwnerShareCommissionHistory = new ChangeLandOwnerShareCommissionHistory(event.transaction.hash.toString());
   changeLandOwnerShareCommissionHistory.stakingSubscribeId = event.params.landOwnerStakeId;
-  changeLandOwnerShareCommissionHistory.stakingAddress = event.params.stakingAddress.toString();
+  changeLandOwnerShareCommissionHistory.stakingAddress = event.params.stakingAddress.toHexString();
   changeLandOwnerShareCommissionHistory.landOwnerCommission = event.params.landOwnerCommission;
   changeLandOwnerShareCommissionHistory.blockNumber = event.block.number
   changeLandOwnerShareCommissionHistory.blockTimestamp = event.block.timestamp
@@ -89,7 +89,7 @@ export function handleStakeLandOwner(
     const stakeLandOwner = new StakeLandOwner(landOwnerStakeId);
     const stakingProgramId = event.params.stakingProgramId.toString();
     stakeLandOwner.tokenId = event.params.tokenId;
-    stakeLandOwner.ownerAddress = event.params.ownerAddress.toString();
+    stakeLandOwner.ownerAddress = event.params.ownerAddress.toHexString();
     stakeLandOwner.stakingProgram = stakingProgramId;
     stakeLandOwner.stakingStartDate = event.params.stakingStartDate;
     stakeLandOwner.stakingEndDate = event.params.stakingEndDate;
@@ -125,7 +125,7 @@ export function handleStakeLandShare(
 
     const shareStakingSubscribe = new StakeLandShare(shareStakingSubscribeId);
     shareStakingSubscribe.stakeLandOwner = event.params.landOwnerStakeId.toString();
-    shareStakingSubscribe.shareAddress = event.params.shareAddress.toString();
+    shareStakingSubscribe.shareAddress = event.params.shareAddress.toHexString();
     shareStakingSubscribe.shareAmount = event.params.shareAmount;
     shareStakingSubscribe.stakingStartDate = event.params.stakingStartDate;
     shareStakingSubscribe.stakingEndDate = event.params.stakingEndDate;

@@ -72,16 +72,16 @@ export function handleTransfer(event: TransferEvent): void {
       if((event.params.tokenId.equals(BigInt.fromI32(0))) && (event.params.tokenId.equals(BigInt.fromI32(24)) || event.params.tokenId.gt(BigInt.fromI32(24)))){
         nft.tierID = BigInt.fromI32(0);
       }
-      else if((event.params.tokenId.equals(BigInt.fromI32(25)) || event.params.tokenId.lt(BigInt.fromI32(25))) && (event.params.tokenId.equals(BigInt.fromI32(274)) || event.params.tokenId.gt(BigInt.fromI32(274)))){
+      else if((event.params.tokenId.equals(BigInt.fromI32(25)) || event.params.tokenId.gt(BigInt.fromI32(25))) && (event.params.tokenId.equals(BigInt.fromI32(274)) || event.params.tokenId.lt(BigInt.fromI32(274)))){
         nft.tierID = BigInt.fromI32(1);
       }
-      else if((event.params.tokenId.equals(BigInt.fromI32(275)) || event.params.tokenId.lt(BigInt.fromI32(275))) && (event.params.tokenId.equals(BigInt.fromI32(1024)) || event.params.tokenId.gt(BigInt.fromI32(1024)))){
+      else if((event.params.tokenId.equals(BigInt.fromI32(275)) || event.params.tokenId.gt(BigInt.fromI32(275))) && (event.params.tokenId.equals(BigInt.fromI32(1024)) || event.params.tokenId.lt(BigInt.fromI32(1024)))){
         nft.tierID = BigInt.fromI32(2);
       }
-      else if((event.params.tokenId.equals(BigInt.fromI32(1025)) || event.params.tokenId.lt(BigInt.fromI32(1025))) && (event.params.tokenId.equals(BigInt.fromI32(2274)) || event.params.tokenId.gt(BigInt.fromI32(2274)))){
+      else if((event.params.tokenId.equals(BigInt.fromI32(1025)) || event.params.tokenId.gt(BigInt.fromI32(1025))) && (event.params.tokenId.equals(BigInt.fromI32(2274)) || event.params.tokenId.lt(BigInt.fromI32(2274)))){
         nft.tierID = BigInt.fromI32(3);
       }
-      else if((event.params.tokenId.equals(BigInt.fromI32(2275)) || event.params.tokenId.lt(BigInt.fromI32(2275))) && (event.params.tokenId.equals(BigInt.fromI32(4024)) || event.params.tokenId.gt(BigInt.fromI32(4024)))){
+      else if((event.params.tokenId.equals(BigInt.fromI32(2275)) || event.params.tokenId.gt(BigInt.fromI32(2275))) && (event.params.tokenId.equals(BigInt.fromI32(4024)) || event.params.tokenId.lt(BigInt.fromI32(4024)))){
         nft.tierID = BigInt.fromI32(4);
       }
       else nft.tierID = BigInt.fromI32(0);
