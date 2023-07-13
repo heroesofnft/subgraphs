@@ -26,7 +26,7 @@ dataSources:
     name: LandToken
     network: herotestnet
     source:
-      address: "0xa98E688018fC94e399aA8306fBc673b823fcAf0B"
+      address: "0x55cbbeb6568BBB80a7778Ef6398D553433F4C4d5"
       abi: LandToken
       startBlock: 32153
     mapping:
@@ -62,7 +62,7 @@ dataSources:
     name: LandStaking
     network: herotestnet
     source:
-      address: "0x3553c4B2d532c36ef8eF6c9E3a26951e60Aee06b"
+      address: "0xdB04087114F25B23B5Fc305312fbB1F90AFE49cC"
       abi: LandStaking
       startBlock: 32155
     mapping:
