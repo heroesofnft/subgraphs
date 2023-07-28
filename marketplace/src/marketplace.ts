@@ -1,4 +1,4 @@
-import { Nft, Ask, ReserveAuction, Offer, PriceHistory } from "../generated/schema";
+import { Nft, Ask, ReserveAuction, Offer, PriceHistory, ListHistory } from "../generated/schema";
 import {
   AskCreated,
   AskPriceUpdated,
@@ -42,6 +42,24 @@ export function handleAskCreated(event: AskCreated): void {
     ask.askPrice = event.params.ask.askPrice;
     ask.createdAtTimestamp = event.block.timestamp;
     ask.save();
+
+    // Adding listing to ListHistory
+    const listHistory = new ListHistory(
+      event.params.tokenId.toString() +
+        "-" +
+        event.params.tokenContract.toHex() +
+        "-" +
+        event.block.timestamp.toString()
+    );
+    listHistory.tokenID = event.params.tokenId;
+    listHistory.tokenContract = event.params.tokenContract;
+    listHistory.seller = event.params.ask.seller;
+    listHistory.sellerFundsRecipient = event.params.ask.sellerFundsRecipient;
+    listHistory.price = event.params.ask.askPrice;
+    listHistory.currency = event.params.ask.askCurrency;
+    listHistory.createdAtTimestamp = event.block.timestamp;
+    listHistory.isCreated = true;
+    listHistory.save();
   }
 }
 
@@ -65,6 +83,24 @@ export function handleAskCanceled(event: AskCanceled): void {
     );
     if (ask) {
       store.remove("Ask", ask.id);
+
+      // Adding listing out to ListHistory
+      const listHistory = new ListHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      listHistory.tokenID = event.params.tokenId;
+      listHistory.tokenContract = event.params.tokenContract;
+      listHistory.seller = event.params.ask.seller;
+      listHistory.sellerFundsRecipient = event.params.ask.sellerFundsRecipient;
+      listHistory.price = event.params.ask.askPrice;
+      listHistory.currency = event.params.ask.askCurrency;
+      listHistory.createdAtTimestamp = event.block.timestamp;
+      listHistory.isCreated = false;
+      listHistory.save();
     }
   }
 }
