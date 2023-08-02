@@ -56,7 +56,18 @@ type ListHistory @entity {
   currency: Bytes!
   price: BigInt!
   createdAtTimestamp: BigInt!
-  isCreated: Boolean!
+  type: String!
+}
+
+type OfferHistory @entity {
+  id: ID!
+  tokenID: BigInt!
+  tokenContract: Bytes!
+  maker: Bytes!
+  currency: Bytes!
+  price: BigInt!
+  createdAtTimestamp: BigInt!
+  type: String!
 }
 
 type Nft @entity {

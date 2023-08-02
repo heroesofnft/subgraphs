@@ -1,4 +1,12 @@
-import { Nft, Ask, ReserveAuction, Offer, PriceHistory, ListHistory } from "../generated/schema";
+import {
+  Nft,
+  Ask,
+  ReserveAuction,
+  Offer,
+  PriceHistory,
+  ListHistory,
+  OfferHistory
+} from "../generated/schema";
 import {
   AskCreated,
   AskPriceUpdated,
@@ -58,7 +66,7 @@ export function handleAskCreated(event: AskCreated): void {
     listHistory.price = event.params.ask.askPrice;
     listHistory.currency = event.params.ask.askCurrency;
     listHistory.createdAtTimestamp = event.block.timestamp;
-    listHistory.isCreated = true;
+    listHistory.type = "Listing";
     listHistory.save();
   }
 }
@@ -72,6 +80,24 @@ export function handleAskPriceUpdated(event: AskPriceUpdated): void {
       ask.askPrice = event.params.ask.askPrice;
       ask.askCurrency = event.params.ask.askCurrency;
       ask.save();
+
+      // Adding listing to ListHistory
+      const listHistory = new ListHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      listHistory.tokenID = event.params.tokenId;
+      listHistory.tokenContract = event.params.tokenContract;
+      listHistory.seller = event.params.ask.seller;
+      listHistory.sellerFundsRecipient = event.params.ask.sellerFundsRecipient;
+      listHistory.price = event.params.ask.askPrice;
+      listHistory.currency = event.params.ask.askCurrency;
+      listHistory.createdAtTimestamp = event.block.timestamp;
+      listHistory.type = "Listing Price Update";
+      listHistory.save();
     }
   }
 }
@@ -99,7 +125,7 @@ export function handleAskCanceled(event: AskCanceled): void {
       listHistory.price = event.params.ask.askPrice;
       listHistory.currency = event.params.ask.askCurrency;
       listHistory.createdAtTimestamp = event.block.timestamp;
-      listHistory.isCreated = false;
+      listHistory.type = "Listing Cancelled";
       listHistory.save();
     }
   }
@@ -232,6 +258,23 @@ export function handleOfferCreated(event: OfferCreated): void {
     offer.findersFeeBps = event.params.offer.findersFeeBps;
     offer.createdAtTimestamp = event.block.timestamp;
     offer.save();
+
+    // Adding offer out to OfferHistory
+    const offerHistory = new OfferHistory(
+      event.params.tokenId.toString() +
+        "-" +
+        event.params.tokenContract.toHex() +
+        "-" +
+        event.block.timestamp.toString()
+    );
+    offerHistory.tokenID = event.params.tokenId;
+    offerHistory.tokenContract = event.params.tokenContract;
+    offerHistory.maker = event.params.offer.maker;
+    offerHistory.price = event.params.offer.amount;
+    offerHistory.currency = event.params.offer.currency;
+    offerHistory.createdAtTimestamp = event.block.timestamp;
+    offerHistory.type = "Offer";
+    offerHistory.save();
   }
 }
 
@@ -242,6 +285,23 @@ export function handleOfferUpdated(event: OfferUpdated): void {
       offer.currency = event.params.offer.currency;
       offer.offerPrice = event.params.offer.amount;
       offer.save();
+
+      // Adding offer out to OfferHistory
+      const offerHistory = new OfferHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      offerHistory.tokenID = event.params.tokenId;
+      offerHistory.tokenContract = event.params.tokenContract;
+      offerHistory.maker = event.params.offer.maker;
+      offerHistory.price = event.params.offer.amount;
+      offerHistory.currency = event.params.offer.currency;
+      offerHistory.createdAtTimestamp = event.block.timestamp;
+      offerHistory.type = "Offer Price Update";
+      offerHistory.save();
     }
   }
 }
@@ -251,6 +311,23 @@ export function handleOfferCanceled(event: OfferCanceled): void {
     const offer = Offer.load(event.params.id.toString());
     if (offer) {
       store.remove("Offer", offer.id);
+
+      // Adding offer out to OfferHistory
+      const offerHistory = new OfferHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      offerHistory.tokenID = event.params.tokenId;
+      offerHistory.tokenContract = event.params.tokenContract;
+      offerHistory.maker = event.params.offer.maker;
+      offerHistory.price = event.params.offer.amount;
+      offerHistory.currency = event.params.offer.currency;
+      offerHistory.createdAtTimestamp = event.block.timestamp;
+      offerHistory.type = "Offer Canceled";
+      offerHistory.save();
     }
   }
 }
@@ -276,6 +353,23 @@ export function handleOfferFilled(event: OfferFilled): void {
       // priceHistory.currency = event.params.offer.currency;
       // priceHistory.createdAtTimestamp = event.block.timestamp;
       // priceHistory.save();
+
+      // Adding offer out to OfferHistory
+      const offerHistory = new OfferHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      offerHistory.tokenID = event.params.tokenId;
+      offerHistory.tokenContract = event.params.tokenContract;
+      offerHistory.maker = event.params.offer.maker;
+      offerHistory.price = event.params.offer.amount;
+      offerHistory.currency = event.params.offer.currency;
+      offerHistory.createdAtTimestamp = event.block.timestamp;
+      offerHistory.type = "Offer Accepted";
+      offerHistory.save();
     }
   }
 }
