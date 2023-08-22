@@ -5,7 +5,10 @@ import {
   Offer,
   PriceHistory,
   ListHistory,
-  OfferHistory
+  OfferHistory,
+  BidHistory,
+  OfferHistoryAggregation,
+  BidHistoryAggregation
 } from "../generated/schema";
 import {
   AskCreated,
@@ -34,7 +37,8 @@ import {
   dataSource,
   ethereum,
   store,
-  log
+  log,
+  bigInt
 } from "@graphprotocol/graph-ts";
 
 // ASK HANDLERS
@@ -175,6 +179,26 @@ export function handleAuctionCreated(event: AuctionCreated): void {
     reserveAuction.startTime = event.params.auction.startTime;
     reserveAuction.createdAtTimestamp = event.block.timestamp;
     reserveAuction.save();
+
+    // Add bid to BidHistory
+    const bidHistory = new BidHistory(
+      event.params.tokenId.toString() +
+        "-" +
+        event.params.tokenContract.toHex() +
+        "-" +
+        event.block.timestamp.toString()
+    );
+    bidHistory.tokenID = event.params.tokenId;
+    bidHistory.tokenContract = event.params.tokenContract;
+    bidHistory.seller = event.params.auction.seller;
+    bidHistory.sellerFundsRecipient = event.params.auction.sellerFundsRecipient;
+    bidHistory.reservePrice = event.params.auction.reservePrice;
+    bidHistory.currency = event.params.auction.currency;
+    bidHistory.duration = event.params.auction.duration;
+    bidHistory.startTime = event.params.auction.startTime;
+    bidHistory.createdAtTimestamp = event.block.timestamp;
+    bidHistory.type = "ReserveAuctionCreated";
+    bidHistory.save();
   }
 }
 
@@ -186,6 +210,26 @@ export function handleAuctionReservePriceUpdated(event: AuctionReservePriceUpdat
     if (reserveAuction) {
       reserveAuction.reservePrice = event.params.auction.reservePrice;
       reserveAuction.save();
+
+      // Add bid to BidHistory
+      const bidHistory = new BidHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      bidHistory.tokenID = event.params.tokenId;
+      bidHistory.tokenContract = event.params.tokenContract;
+      bidHistory.seller = event.params.auction.seller;
+      bidHistory.sellerFundsRecipient = event.params.auction.sellerFundsRecipient;
+      bidHistory.reservePrice = event.params.auction.reservePrice;
+      bidHistory.currency = event.params.auction.currency;
+      bidHistory.duration = event.params.auction.duration;
+      bidHistory.startTime = event.params.auction.startTime;
+      bidHistory.createdAtTimestamp = event.block.timestamp;
+      bidHistory.type = "ReservePriceUpdated";
+      bidHistory.save();
     }
   }
 }
@@ -203,6 +247,53 @@ export function handleAuctionBid(event: AuctionBid): void {
       reserveAuction.updatedAtTimestamp = event.block.timestamp;
       reserveAuction.save();
     }
+
+    // Add bid to BidHistory
+    const bidHistory = new BidHistory(
+      event.params.tokenId.toString() +
+        "-" +
+        event.params.tokenContract.toHex() +
+        "-" +
+        event.block.timestamp.toString()
+    );
+    bidHistory.tokenID = event.params.tokenId;
+    bidHistory.tokenContract = event.params.tokenContract;
+    bidHistory.bidder = event.params.auction.highestBidder;
+    bidHistory.bidAmount = event.params.auction.highestBid;
+    bidHistory.seller = event.params.auction.seller;
+    bidHistory.sellerFundsRecipient = event.params.auction.sellerFundsRecipient;
+    bidHistory.reservePrice = event.params.auction.reservePrice;
+    bidHistory.currency = event.params.auction.currency;
+    bidHistory.duration = event.params.auction.duration;
+    bidHistory.startTime = event.params.auction.startTime;
+    bidHistory.createdAtTimestamp = event.block.timestamp;
+    bidHistory.type = "Bid";
+    bidHistory.save();
+
+    // Add bid to BidHistoryAggregation
+    const bidHistoryAggregation = BidHistoryAggregation.load(
+      event.params.tokenId.toString() + "-" + event.params.tokenContract.toHex()
+    );
+    if (bidHistoryAggregation) {
+      bidHistoryAggregation.count = bidHistoryAggregation.count + 1;
+      if (bidHistoryAggregation.minPrice > event.params.auction.highestBid) {
+        bidHistoryAggregation.minPrice = event.params.auction.highestBid;
+      }
+      if (bidHistoryAggregation.maxPrice < event.params.auction.highestBid) {
+        bidHistoryAggregation.maxPrice = event.params.auction.highestBid;
+      }
+      bidHistoryAggregation.save();
+    } else {
+      const bidHistoryAggregation = new BidHistoryAggregation(
+        event.params.tokenId.toString() + "-" + event.params.tokenContract.toHex()
+      );
+      bidHistoryAggregation.tokenID = event.params.tokenId;
+      bidHistoryAggregation.tokenContract = event.params.tokenContract;
+      bidHistoryAggregation.count = 1;
+      bidHistoryAggregation.minPrice = event.params.auction.highestBid;
+      bidHistoryAggregation.maxPrice = event.params.auction.highestBid;
+      bidHistoryAggregation.save();
+    }
   }
 }
 
@@ -213,6 +304,26 @@ export function handleAuctionCanceled(event: AuctionCanceled): void {
     );
     if (reserveAuction) {
       store.remove("ReserveAuction", reserveAuction.id);
+
+      // Add bid to BidHistory
+      const bidHistory = new BidHistory(
+        event.params.tokenId.toString() +
+          "-" +
+          event.params.tokenContract.toHex() +
+          "-" +
+          event.block.timestamp.toString()
+      );
+      bidHistory.tokenID = event.params.tokenId;
+      bidHistory.tokenContract = event.params.tokenContract;
+      bidHistory.seller = event.params.auction.seller;
+      bidHistory.sellerFundsRecipient = event.params.auction.sellerFundsRecipient;
+      bidHistory.reservePrice = event.params.auction.reservePrice;
+      bidHistory.currency = event.params.auction.currency;
+      bidHistory.duration = event.params.auction.duration;
+      bidHistory.startTime = event.params.auction.startTime;
+      bidHistory.createdAtTimestamp = event.block.timestamp;
+      bidHistory.type = "ReserveAuctionCanceled";
+      bidHistory.save();
     }
   }
 }
@@ -275,6 +386,31 @@ export function handleOfferCreated(event: OfferCreated): void {
     offerHistory.createdAtTimestamp = event.block.timestamp;
     offerHistory.type = "Offer";
     offerHistory.save();
+
+    // Adding offer out to OfferHistoryAggregation
+    const offerHistoryAggregation = OfferHistoryAggregation.load(
+      event.params.tokenId.toString() + "-" + event.params.tokenContract.toHex()
+    );
+    if (offerHistoryAggregation) {
+      offerHistoryAggregation.count = offerHistoryAggregation.count + 1;
+      if (offerHistoryAggregation.minPrice > event.params.offer.amount) {
+        offerHistoryAggregation.minPrice = event.params.offer.amount;
+      }
+      if (offerHistoryAggregation.maxPrice < event.params.offer.amount) {
+        offerHistoryAggregation.maxPrice = event.params.offer.amount;
+      }
+      offerHistoryAggregation.save();
+    } else {
+      const offerHistoryAggregation = new OfferHistoryAggregation(
+        event.params.tokenId.toString() + "-" + event.params.tokenContract.toHex()
+      );
+      offerHistoryAggregation.tokenID = event.params.tokenId;
+      offerHistoryAggregation.tokenContract = event.params.tokenContract;
+      offerHistoryAggregation.count = 1;
+      offerHistoryAggregation.minPrice = event.params.offer.amount;
+      offerHistoryAggregation.maxPrice = event.params.offer.amount;
+      offerHistoryAggregation.save();
+    }
   }
 }
 
