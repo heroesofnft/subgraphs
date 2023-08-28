@@ -157,6 +157,7 @@ export function handleAskFilled(event: AskFilled): void {
       priceHistory.price = event.params.ask.askPrice;
       priceHistory.currency = event.params.ask.askCurrency;
       priceHistory.createdAtTimestamp = event.block.timestamp;
+      priceHistory.buyer = event.params.buyer;
       priceHistory.save();
     }
   }
@@ -351,6 +352,7 @@ export function handleAuctionEnded(event: AuctionEnded): void {
       priceHistory.price = event.params.auction.highestBid;
       priceHistory.currency = event.params.auction.currency;
       priceHistory.createdAtTimestamp = event.block.timestamp;
+      priceHistory.buyer = event.params.auction.highestBidder;
       priceHistory.save();
     }
   }

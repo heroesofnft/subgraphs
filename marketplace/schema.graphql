@@ -45,6 +45,7 @@ type PriceHistory @entity {
   currency: Bytes!
   price: BigInt!
   createdAtTimestamp: BigInt!
+  buyer: Bytes!
 }
 
 type ListHistory @entity {
