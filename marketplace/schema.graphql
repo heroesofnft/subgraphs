@@ -113,3 +113,11 @@ type Nft @entity {
   createdAtTimestamp: BigInt!
   tokenURI: String
 }
+
+type ContractInfo @entity {
+  id: ID!
+  totalVolume: BigInt!
+  numberOfListings: Int!
+  numberOfBids: Int!
+  numberOfOffers: Int!
+}

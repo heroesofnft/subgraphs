@@ -19,6 +19,7 @@ dataSources:
         - Ask
         - Nft
         - TransferHistory
+        - ContractInfo
       abis:
         - name: AsksV1_1
           file: ./abis/AsksV1_1.json
@@ -47,6 +48,7 @@ dataSources:
         - Offer
         - Nft
         - TransferHistory
+        - ContractInfo
       abis:
         - name: OffersV1
           file: ./abis/OffersV1.json
@@ -75,6 +77,7 @@ dataSources:
         - ReserveAuction
         - Nft
         - TransferHistory
+        - ContractInfo
       abis:
         - name: ReserveAuctionCoreErc20
           file: ./abis/ReserveAuctionCoreErc20.json

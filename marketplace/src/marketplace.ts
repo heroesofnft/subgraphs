@@ -8,7 +8,8 @@ import {
   OfferHistory,
   BidHistory,
   OfferHistoryAggregation,
-  BidHistoryAggregation
+  BidHistoryAggregation,
+  ContractInfo
 } from "../generated/schema";
 import {
   AskCreated,
@@ -72,6 +73,20 @@ export function handleAskCreated(event: AskCreated): void {
     listHistory.createdAtTimestamp = event.block.timestamp;
     listHistory.type = "Listing";
     listHistory.save();
+
+    // Add listing to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.numberOfListings = contractInfo.numberOfListings + 1;
+      contractInfo.save();
+    } else {
+      const contractInfo = new ContractInfo(event.params.tokenContract.toHex());
+      contractInfo.numberOfListings = 1;
+      contractInfo.numberOfBids = 0;
+      contractInfo.numberOfOffers = 0;
+      contractInfo.totalVolume = BigInt.fromI32(0);
+      contractInfo.save();
+    }
   }
 }
 
@@ -131,6 +146,13 @@ export function handleAskCanceled(event: AskCanceled): void {
       listHistory.createdAtTimestamp = event.block.timestamp;
       listHistory.type = "Listing Cancelled";
       listHistory.save();
+
+      // Add listing to ContractInfo
+      const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+      if (contractInfo) {
+        contractInfo.numberOfListings = contractInfo.numberOfListings - 1;
+        contractInfo.save();
+      }
     }
   }
 }
@@ -159,6 +181,14 @@ export function handleAskFilled(event: AskFilled): void {
       priceHistory.createdAtTimestamp = event.block.timestamp;
       priceHistory.buyer = event.params.buyer;
       priceHistory.save();
+
+      // Adding listing out to ContractInfo
+      const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+      if (contractInfo) {
+        contractInfo.numberOfListings = contractInfo.numberOfListings - 1;
+        contractInfo.totalVolume = contractInfo.totalVolume.plus(event.params.ask.askPrice);
+        contractInfo.save();
+      }
     }
   }
 }
@@ -200,6 +230,19 @@ export function handleAuctionCreated(event: AuctionCreated): void {
     bidHistory.createdAtTimestamp = event.block.timestamp;
     bidHistory.type = "ReserveAuctionCreated";
     bidHistory.save();
+
+    // Add bid to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.save();
+    } else {
+      const contractInfo = new ContractInfo(event.params.tokenContract.toHex());
+      contractInfo.numberOfBids = 1;
+      contractInfo.numberOfListings = 0;
+      contractInfo.numberOfOffers = 0;
+      contractInfo.totalVolume = BigInt.fromI32(0);
+      contractInfo.save();
+    }
   }
 }
 
@@ -295,6 +338,13 @@ export function handleAuctionBid(event: AuctionBid): void {
       bidHistoryAggregation.maxPrice = event.params.auction.highestBid;
       bidHistoryAggregation.save();
     }
+
+    // Add bid to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.numberOfBids = contractInfo.numberOfBids + 1;
+      contractInfo.save();
+    }
   }
 }
 
@@ -355,6 +405,13 @@ export function handleAuctionEnded(event: AuctionEnded): void {
       priceHistory.buyer = event.params.auction.highestBidder;
       priceHistory.save();
     }
+
+    // Add bid to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.totalVolume = contractInfo.totalVolume.plus(event.params.auction.highestBid);
+      contractInfo.save();
+    }
   }
 }
 
@@ -412,6 +469,20 @@ export function handleOfferCreated(event: OfferCreated): void {
       offerHistoryAggregation.minPrice = event.params.offer.amount;
       offerHistoryAggregation.maxPrice = event.params.offer.amount;
       offerHistoryAggregation.save();
+    }
+
+    // Add offer to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.numberOfOffers = contractInfo.numberOfOffers + 1;
+      contractInfo.save();
+    } else {
+      const contractInfo = new ContractInfo(event.params.tokenContract.toHex());
+      contractInfo.numberOfOffers = 1;
+      contractInfo.numberOfBids = 0;
+      contractInfo.numberOfListings = 0;
+      contractInfo.totalVolume = BigInt.fromI32(0);
+      contractInfo.save();
     }
   }
 }
@@ -508,6 +579,13 @@ export function handleOfferFilled(event: OfferFilled): void {
       offerHistory.createdAtTimestamp = event.block.timestamp;
       offerHistory.type = "Offer Accepted";
       offerHistory.save();
+    }
+
+    // Add offer to ContractInfo
+    const contractInfo = ContractInfo.load(event.params.tokenContract.toHex());
+    if (contractInfo) {
+      contractInfo.totalVolume = contractInfo.totalVolume.plus(event.params.offer.amount);
+      contractInfo.save();
     }
   }
 }
