@@ -101,6 +101,16 @@ export function handleTransferERC721(event: Transfer): void {
       owner.count = BigInt.fromI32(1);
       owner.save();
     }
+
+    const ownerExistFrom = Owner.load(event.params.from.toHex());
+    if (ownerExistFrom) {
+      ownerExistFrom.count = ownerExistFrom.count.minus(BigInt.fromI32(1));
+      ownerExistFrom.save();
+    } else {
+      const owner = new Owner(event.params.from.toHex());
+      owner.count = BigInt.fromI32(1);
+      owner.save();
+    }
   }
 }
 
