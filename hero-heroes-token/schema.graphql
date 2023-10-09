@@ -57,3 +57,18 @@ type Rent @entity {
   expires: BigInt!
   createdAtTimestamp: BigInt!
 }
+
+type NftAggregation @entity {
+  id: ID!
+  count: BigInt!
+}
+
+type Owner @entity {
+  id: ID!
+  count: BigInt!
+}
+
+type OwnerAggregation @entity {
+  id: ID!
+  uniqueOwners: BigInt!
+}
