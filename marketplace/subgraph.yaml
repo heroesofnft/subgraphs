@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: AsksV1_1
-    network: herotestnet
+    network: avalanche
     source:
-      address: "0x1aF7386bF311EfF66a8840cFC47D6D3369ed0933"
+      address: "0x1CCE3a56E9A6aC44cE2d980C61908E4691e6267e"
       abi: AsksV1_1
-      startBlock: 17416
+      startBlock: 37528282
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -35,11 +35,11 @@ dataSources:
       file: ./src/marketplace.ts
   - kind: ethereum/contract
     name: OffersV1
-    network: herotestnet
+    network: avalanche
     source:
-      address: "0xd898e705F887EE389f7Db2F7695Ef1d8806B2180"
+      address: "0xb5146CEd01aa87f8fAc8f6B70602d54263982A1C"
       abi: OffersV1
-      startBlock: 17416
+      startBlock: 37528282
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -64,11 +64,11 @@ dataSources:
       file: ./src/marketplace.ts
   - kind: ethereum/contract
     name: ReserveAuctionCoreErc20
-    network: herotestnet
+    network: avalanche
     source:
-      address: "0x72D6715294E1cB85F9D6c279E084601a7aa4635c"
+      address: "0xBDaF47CfE211e62240749B03C4dc9608F2221a70"
       abi: ReserveAuctionCoreErc20
-      startBlock: 17416
+      startBlock: 37528282
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
