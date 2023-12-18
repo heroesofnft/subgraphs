@@ -54,8 +54,8 @@ dataSources:
           handler: handleTransfer
         - event: TransferSaleTotalAmountEvent(uint256,address)
           handler: handleTransferSaleTotalAmountEvent
-        - event: UpdateUser(indexed uint256,indexed address,uint64)
-          handler: handleUpdateUser
+        #- event: UpdateUser(indexed uint256,indexed address,uint64)
+        #  handler: handleUpdateUser
         - event: WhiteListSaveEvent(uint256,indexed uint256,uint256,address[])
           handler: handleWhiteListSaveEvent
       file: ./src/land-token.ts
@@ -81,8 +81,8 @@ dataSources:
         - name: LandStaking
           file: ./abis/LandStaking.json
       eventHandlers:
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
+        #- event: OwnershipTransferred(indexed address,indexed address)
+        #  handler: handleOwnershipTransferred
         - event: SaveStakingProgram(uint256,indexed uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSaveStakingProgram
         - event: ChangeLandOwnerShareCommission(uint256,uint256,indexed address)
