@@ -1,10 +1,5 @@
 [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -185,12 +180,6 @@
       },
       {
         "indexed": false,
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "price",
         "type": "uint256"
@@ -209,21 +198,15 @@
       },
       {
         "indexed": false,
-        "internalType": "bool",
-        "name": "saleEnabled",
-        "type": "bool"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint64",
+        "internalType": "uint256",
         "name": "startDate",
-        "type": "uint64"
+        "type": "uint256"
       },
       {
         "indexed": false,
-        "internalType": "uint64",
+        "internalType": "uint256",
         "name": "endDate",
-        "type": "uint64"
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -234,8 +217,20 @@
       {
         "indexed": false,
         "internalType": "bool",
+        "name": "saleEnabled",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
         "name": "whiteListEnabled",
         "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       }
     ],
     "name": "TokenSaleProgramEvent",
@@ -353,15 +348,15 @@
       },
       {
         "indexed": false,
-        "internalType": "address[]",
-        "name": "whiteList",
-        "type": "address[]"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "whiteListDiscountRatio",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "whiteList",
+        "type": "address[]"
       }
     ],
     "name": "WhiteListSaveEvent",
@@ -482,31 +477,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTokenSoldCounts",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "buyer",
-            "type": "address"
-          }
-        ],
-        "internalType": "struct LandTokenBase.TokenSoldCount[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -529,17 +499,17 @@
             "type": "uint256"
           },
           {
-            "internalType": "address[]",
-            "name": "whiteList",
-            "type": "address[]"
-          },
-          {
             "internalType": "uint256",
             "name": "whiteListDiscountRatio",
             "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "whiteList",
+            "type": "address[]"
           }
         ],
-        "internalType": "struct LandTokenBase.WhiteListProgram",
+        "internalType": "struct LandTokenV0.WhiteListProgram",
         "name": "",
         "type": "tuple"
       }
@@ -761,11 +731,6 @@
             "type": "uint256"
           },
           {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
@@ -781,19 +746,14 @@
             "type": "uint256"
           },
           {
-            "internalType": "bool",
-            "name": "saleEnabled",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint64",
+            "internalType": "uint256",
             "name": "startDate",
-            "type": "uint64"
+            "type": "uint256"
           },
           {
-            "internalType": "uint64",
+            "internalType": "uint256",
             "name": "endDate",
-            "type": "uint64"
+            "type": "uint256"
           },
           {
             "internalType": "uint256[2]",
@@ -802,11 +762,21 @@
           },
           {
             "internalType": "bool",
+            "name": "saleEnabled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
             "name": "whiteListEnabled",
             "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
           }
         ],
-        "internalType": "struct LandTokenBase.TokenSaleProgram[]",
+        "internalType": "struct LandTokenV0.TokenSaleProgram[]",
         "name": "_saleItems",
         "type": "tuple[]"
       },
@@ -823,17 +793,17 @@
             "type": "uint256"
           },
           {
-            "internalType": "address[]",
-            "name": "whiteList",
-            "type": "address[]"
-          },
-          {
             "internalType": "uint256",
             "name": "whiteListDiscountRatio",
             "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "whiteList",
+            "type": "address[]"
           }
         ],
-        "internalType": "struct LandTokenBase.WhiteListProgram[]",
+        "internalType": "struct LandTokenV0.WhiteListProgram[]",
         "name": "_whiteListProgramItems",
         "type": "tuple[]"
       }
