@@ -26,9 +26,10 @@ dataSources:
     name: LandToken
     network: herotestnet
     source:
-      address: "0xa98E688018fC94e399aA8306fBc673b823fcAf0B"
+      #address: "0xa98E688018fC94e399aA8306fBc673b823fcAf0B"
+      address: "0xE56f5789097dA17566b44cd525Ee65607Ba02195"
       abi: LandToken
-      startBlock: 32153
+      startBlock: 4071580
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -62,9 +63,10 @@ dataSources:
     name: LandStaking
     network: herotestnet
     source:
-      address: "0x3553c4B2d532c36ef8eF6c9E3a26951e60Aee06b"
+      #address: "0x3553c4B2d532c36ef8eF6c9E3a26951e60Aee06b"
+      address: "0x3163D473185c11f2eA2797F0e0eE4aAb68C2731B"
       abi: LandStaking
-      startBlock: 32155
+      startBlock: 4071580
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
