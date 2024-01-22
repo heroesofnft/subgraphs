@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: HeroesVault
-    network: avalanche
+    network: herotestnet
     source:
       address: "0x20b66f4BDA4426a93dE632C74B879DFa77FB6A03"
       abi: HeroesVault
