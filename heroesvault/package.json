@@ -7,9 +7,10 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ defikintaro/HeroesVault",
-    "create-local": "graph create --node http://localhost:8020/ defikintaro/HeroesVault",
-    "remove-local": "graph remove --node http://localhost:8020/ defikintaro/HeroesVault",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 defikintaro/HeroesVault"
+    "create-local": "npx graph create --node http://localhost:8020/ heroesofnft/hero-vault",
+    "remove-local": "npx graph remove --node http://localhost:8020/ heroesofnft/hero-vault",
+    "deploy-local": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-vault",
+    "deploy-local:herotestnet": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-vault subgraph-herotestnet.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.26.0",
