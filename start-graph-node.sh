@@ -14,7 +14,7 @@ create_service_file () {
   echo "Type=simple">>graph.service
   echo "User=$(whoami)">>graph.service
   echo "WorkingDirectory=$HOME">>graph.service
-  echo "ExecStart=sudo docker compose -f /home/hon/subgraphs/hero-heroes-token/docker-compose-herotestnet.yml up">>graph.service
+  echo "ExecStart=sudo docker compose -f /home/hon/subgraphs/hero-heroes-token/docker-compose-fuji.yml up">>graph.service
   echo "LimitNOFILE=32768">>graph.service
   echo "Restart=always">>graph.service
   echo "RestartSec=1">>graph.service

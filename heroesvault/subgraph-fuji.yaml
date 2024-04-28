@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: HeroesVault
-    network: herotestnet
+    network: fuji
     source:
-      address: "0xb051163536C19e95581c3477d6DBb9F6B7A075dc"
+      address: "0xed5471c657093271B8E1fD93Ff09fD3Dd1D6C2b7"
       abi: HeroesVault
-      startBlock: 4362143
+      startBlock: 32136618
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

@@ -8,9 +8,9 @@
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ heroesofnft/hero-nft-liquidity-pool",
     "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ heroesofnft/hero-nft-liquidity-pool subgraph.yaml",
-    "create-local": "graph create --node http://localhost:8020/ heroesofnft/hero-nft-liquidity-pool",
-    "remove-local": "graph remove --node http://localhost:8020/ heroesofnft/hero-nft-liquidity-pool",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft/hero-nft-liquidity-pool",
+    "create-local": "graph create --node http://localhost:8020/ heroesofnft-fuji/hero-nft-liquidity-pool",
+    "remove-local": "graph remove --node http://localhost:8020/ heroesofnft-fuji/hero-nft-liquidity-pool",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 heroesofnft-fuji/hero-nft-liquidity-pool",
     "start:node": "rm -rf ./graph_data && docker-compose up"
   },
   "dependencies": {
